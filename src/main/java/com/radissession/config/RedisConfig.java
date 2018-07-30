@@ -1,5 +1,6 @@
 package com.radissession.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -18,9 +19,27 @@ import com.radissession.queue.MessageSubscriber;
 @ComponentScan("com.radissession")
 public class RedisConfig {
 
+    @Value("${spring.redis.host}")
+    private String hostName;
+
+    @Value("${spring.redis.port}")
+    private int port;
+
+    //@Value("${spring.redis.clientName}")
+    //private String clientName;
+
+    //@Value("${spring.redis.password}")
+   // private String hostName;
+
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
-        return new JedisConnectionFactory();
+        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
+        jedisConnectionFactory.setHostName(hostName);
+        jedisConnectionFactory.setPort(port);
+       // jedisConnectionFactory.setClientName(clientName);
+       // jedisConnectionFactory.setPassword(password);
+
+        return jedisConnectionFactory;
     }
 
     @Bean
