@@ -1,4 +1,4 @@
-package com.radissession.config;
+package com.redissession.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -11,12 +11,12 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.serializer.GenericToStringSerializer;
 
-import com.radissession.queue.MessagePublisher;
-import com.radissession.queue.MessagePublisherImpl;
-import com.radissession.queue.MessageSubscriber;
+import com.redissession.queue.MessagePublisher;
+import com.redissession.queue.MessagePublisherImpl;
+import com.redissession.queue.MessageSubscriber;
 
 @Configuration
-@ComponentScan("com.radissession")
+@ComponentScan("com.redissession")
 public class RedisConfig {
 
     @Value("${spring.redis.host}")

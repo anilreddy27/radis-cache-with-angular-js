@@ -1,8 +1,8 @@
-package com.radissession.repository;
+package com.redissession.repository;
 
 import java.util.Map;
 
-import com.radissession.model.RedisSampleObject;
+import com.redissession.model.RedisSampleObject;
 
 public interface RedisRepository {
 

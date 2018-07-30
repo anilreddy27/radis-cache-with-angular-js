@@ -1,4 +1,4 @@
-package com.radissession.model;
+package com.redissession.model;
 
 import java.io.Serializable;
 

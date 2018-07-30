@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.radissession</groupId>
-	<artifactId>com.radissession</artifactId>
+	<groupId>redissession</groupId>
+	<artifactId>com.redissession</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
-	<name>radissession-example</name>
+	<name>redissession-example</name>
 	<description>Intro to Redis with Spring Boot</description>
 
 	<parent>

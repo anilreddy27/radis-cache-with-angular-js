@@ -1,11 +1,11 @@
-package com.radissession.repository;
+package com.redissession.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.radissession.model.RedisSampleObject;
+import com.redissession.model.RedisSampleObject;
 
 import java.util.Map;
 import javax.annotation.PostConstruct;

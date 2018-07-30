@@ -1,4 +1,4 @@
-package com.radissession.queue;
+package com.redissession.queue;
 
 public interface MessagePublisher {
 

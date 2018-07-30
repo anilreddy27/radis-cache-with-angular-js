@@ -1,7 +1,7 @@
-package com.radissession.controller;
+package com.redissession.controller;
 
-import com.radissession.model.RedisSampleObject;
-import com.radissession.repository.RedisRepository;
+import com.redissession.model.RedisSampleObject;
+import com.redissession.repository.RedisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
