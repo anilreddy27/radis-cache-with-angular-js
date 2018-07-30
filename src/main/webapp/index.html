@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" >
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" ></script>
+	<link rel="stylesheet"
+		  href="//cdn.rawgit.com/angular-ui/bower-ui-grid/master/ui-grid.min.css">
+	<script
+			src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script
+			src="//cdn.rawgit.com/angular-ui/bower-ui-grid/master/ui-grid.min.js"></script>
+	<script src="view/app.js" type="text/javascript"></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="../../../../favicon.ico">
+
+	<title>Session Management</title>
+
+	<style>
+:root {
+
+--input-padding-x: .75rem;
+--input-padding-y: .75rem;
+}
+
+html,
+body {
+  height: 100%;
+ }
+ body {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+table#statsTable {
+	margin-top: .75rem;
+}
+
+.form-SessionMgr {
+  width: 100%;
+  max-width: 420px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-label-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.form-label-group > input,
+.form-label-group > label {
+  padding: var(--input-padding-y var(--input-padding-x);
+}
+
+.form-label-group > label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display:block;
+  width: 100%;
+  margin-bottom:0; /* Override default '<label>' margin *.
+  line-height: 1.5;
+  color: #495057;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  transition: all.ls ease-in-out;
+}
+
+.form-label-group input:: -webkit-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input:-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-moz-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::placeholder {
+  color: transparent;
+}
+
+.form-label-group input:not(:placeholder-shown) {
+  padding-top calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
+  padding-bottom: calc(var(--input-padding-y) / 3;
+}
+
+.form-label-group input:not(:placeholder-shown) ~ label {
+  padding-top calc(var(--input-padding-y / 3));
+  padding-bottom: calc(var(--input-padding-y) / 3;
+  font-size: 12px;
+  color: #777;
+}
+
+</style>
+</head>
+
+<body>
+<form class="form-SessionMgr" name="myForm" ng-controller="StudentCtrl">
+	<div class="alert alert-success" role="alert" ng-if="ctrl.successMessage">{{ctrl.successMessage}}</div>
+	<div class="alert alert-danger" role="alert" ng-if="ctrl.errorMessage">{{ctrl.errorMessage}}</div>
+	<div class="text-center mb-4">
+		<!--  <img class="mb-4" src="/images/stagecoach.jpg" alt="" width="" height="72">-->
+		<h1 class="h3 mb-3 font-weight-normal">Redis Session Simulator</h1>
+
+		<div class="form-label-group">
+		  <label for="objectCount"># of Objects</label>
+		<input type="number" id="objectCount" name="objectCount" ng-model="data.objectCount" autofocus required/>
+	</div>
+
+	<div class="form-label-group">
+		  <label for="objectSize">Object Size(KB)</label>
+	<input type="number" placeholder="Size Of Objects To Insert(kb)" id="objectSize" ng-model="data.objectSize" name="objectSize" required />
+	</div>
+	</div>
+
+	<button class="btn btn-1g btn-primary btn-block" ng-click="putInSession()" type="button" ng-disabled="myForm.$invalid || myForm.$pristine">Put Objects In Session</button>
+	<button class="btn btn-sm btn-secondary btn-block" ng-click="getInSession()" type="button">Show Session</button>
+	<button class="btn btn-sm btn-secondary btn-block" ng-click="deleteSession()" type="button">Clear Session</button>
+	<table class="table table-bordered" id="statsTable">
+		<tr>
+			<td>Session Id:</td>
+			<td><div>{{dataContent.keyName}}</div></td>
+		</tr>
+		<tr>
+			<td>Total Objects In Session:</td>
+			<td><div>{{dataContent.noOfObjects}}</div></td>
+		</tr>
+		<tr>
+			<td>Total Session Size(KB):</td>
+			<td><div>{{dataContent.noOfObjectInSize}}</div></td>
+		</tr><tr>
+		<td>Response Time(In Milli Seconds):</td>
+		<td><div>{{dataContent.responseTime}}</div></td>
+	</tr>
+	</table>
+</form>
+</body>
+</html>
