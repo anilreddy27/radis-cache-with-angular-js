@@ -14,11 +14,11 @@ import javax.annotation.PostConstruct;
 public class RedisRepositoryImpl implements RedisRepository {
     private static final String KEY = "RedisSampleObject";
     
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate redisTemplate;
     private HashOperations hashOperations;
     
     @Autowired
-    public RedisRepositoryImpl(RedisTemplate<String, Object> redisTemplate){
+    public RedisRepositoryImpl(RedisTemplate redisTemplate){
         this.redisTemplate = redisTemplate;
     }
 
