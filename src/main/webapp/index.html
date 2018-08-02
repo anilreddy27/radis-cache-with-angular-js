@@ -113,7 +113,7 @@ table#statsTable {
 <form class="form-SessionMgr" name="myForm" ng-controller="StudentCtrl">
 	<div class="alert alert-success" role="alert" ng-if="ctrl.successMessage">{{ctrl.successMessage}}</div>
 	<div class="alert alert-danger" role="alert" ng-if="ctrl.errorMessage">{{ctrl.errorMessage}}</div>
-	<div class="text-center mb-4">
+	<div class="text-center mb-9">
 		<!--  <img class="mb-4" src="/images/stagecoach.jpg" alt="" width="" height="72">-->
 		<h1 class="h3 mb-3 font-weight-normal">Redis Session Simulator</h1>
 
@@ -126,6 +126,13 @@ table#statsTable {
 		  <label for="objectSize">Object Size(KB)</label>
 	<input type="number" placeholder="Size Of Objects To Insert(kb)" id="objectSize" ng-model="data.objectSize" name="objectSize" required />
 	</div>
+
+		<div class="form-label-group">
+			<label for="objectSize">Session Id</label>
+			<input type="text" placeholder="Session Id" id="sessionId" ng-model="data.sessionId" name="objectSize"  />
+			<p style="font-text:red;" ng-if="isShowErrorMessage">Please Enter Session ID</p>
+		</div>
+
 	</div>
 
 	<button class="btn btn-1g btn-primary btn-block" ng-click="putInSession()" type="button" ng-disabled="myForm.$invalid || myForm.$pristine">Put Objects In Session</button>

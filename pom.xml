@@ -4,9 +4,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>redissession</groupId>
-	<artifactId>com.redissession</artifactId>
+	<artifactId>redis-session</artifactId>
 	<version>0.0.1</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>redissession-example</name>
 	<description>Intro to Redis with Spring Boot</description>
@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.8.RELEASE</version>
+		<version>1.5.15.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 

@@ -20,16 +20,17 @@ public class WebController {
     private RedisRepository redisRepository;
 
     @RequestMapping("/keys")
-    public @ResponseBody Map<Object, Object> keys() {
-        return redisRepository.getAllRedisSampleObject();
+    public @ResponseBody Map<Object, Object> keys(@RequestParam(required = false)String keyName) {
+
+        return redisRepository.getAllRedisSampleObject(keyName);
     }
 
     @RequestMapping("/values")
-    public @ResponseBody Map<String, String> findAll() {
+    public @ResponseBody Map<String, String> findAll(@RequestParam(required = false)String keyName) {
 
         Date fromDate = new Date();
 
-        Map<Object, Object> aa = redisRepository.getAllRedisSampleObject();
+        Map<Object, Object> aa = redisRepository.getAllRedisSampleObject(keyName);
 
         Map<String, String> map = new HashMap<String, String>();
         int size = 0;
@@ -46,7 +47,7 @@ public class WebController {
         Long time= responseDate.getTime() - fromDate.getTime();
 
         Map<String, String> resultMap = new HashMap<String, String>();
-        resultMap.put("keyName",redisRepository.getKEY());
+        resultMap.put("keyName",keyName);
         resultMap.put("noOfObjects", String.valueOf(map.keySet().size()));
         resultMap.put("noOfObjectInSize", String.valueOf(size/1024));
         resultMap.put("responseTime", String.valueOf(time));
@@ -55,7 +56,7 @@ public class WebController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<String> add(
+    public @ResponseBody Map<String, String> add(
         @RequestParam String key,
         @RequestParam String value) {
 
@@ -67,21 +68,24 @@ public class WebController {
             sb.toString();
 
         RedisSampleObject movie = null;
+        String sessionId = UUID.randomUUID().toString();
 
         for(int i =1;i<=Integer.valueOf(key);i++)
         {
             movie = new RedisSampleObject(UUID.randomUUID().toString(), sb.toString());
-            redisRepository.add(movie);
+            redisRepository.add(sessionId,movie);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+         Map<String, String> resultMap = new HashMap<String, String>();
+        resultMap.put("keyName",redisRepository.getKEY()+"_"+sessionId);
+        return resultMap;
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public ResponseEntity<String> delete() {
-        Map<Object, Object> aa = redisRepository.getAllRedisSampleObject();
+    public ResponseEntity<String> delete(@RequestParam(required = false)String keyName) {
+        Map<Object, Object> aa = redisRepository.getAllRedisSampleObject(keyName);
         for(Map.Entry<Object, Object> entry : aa.entrySet()){
             String key = (String) entry.getKey();
-            redisRepository.delete(key);
+            redisRepository.delete(keyName,key);
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }

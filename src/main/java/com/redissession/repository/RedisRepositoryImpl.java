@@ -27,20 +27,20 @@ public class RedisRepositoryImpl implements RedisRepository {
         hashOperations = redisTemplate.opsForHash();
     }
     
-    public void add(final RedisSampleObject movie) {
-        hashOperations.put(KEY, movie.getId(), movie.getName());
+    public void add(String sessionId, final RedisSampleObject movie) {
+        hashOperations.put(KEY+"_"+sessionId, movie.getId(), movie.getName());
     }
 
-    public void delete(final String id) {
-        hashOperations.delete(KEY,id);
+    public void delete(String keyName, final String value) {
+        hashOperations.delete(keyName, value);
     }
     
     public RedisSampleObject getRedisSampleObject(final String id){
         return (RedisSampleObject) hashOperations.get(KEY, id);
     }
     
-    public Map<Object, Object> getAllRedisSampleObject(){
-        return hashOperations.entries(KEY);
+    public Map<Object, Object> getAllRedisSampleObject(String keyName){
+        return hashOperations.entries(keyName);
     }
 
     public String getKEY(){

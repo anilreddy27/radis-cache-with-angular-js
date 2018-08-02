@@ -12,22 +12,50 @@ app.controller('StudentCtrl', ['$scope','StudentService', function ($scope,Stude
 
    $scope.putInSession = function(){
         StudentService.putInSession($scope.data.objectCount,$scope.data.objectSize).success(function(data){
-           $scope.getInSession();
-            $scope.data = {};
+         $scope.data = {};
+           $scope.getInSessionToLoad(data);
+
         });;
-        $scope.data = {};
-        $scope.getInSession();
    };
    $scope.getInSession = function(){
-       StudentService.showSession().success(function(data){
+
+        if($scope.data.sessionId == undefined)
+        {
+            $scope.isShowErrorMessage = true;
+        }else{
+        $scope.isShowErrorMessage = false;
+        }
+        if(!$scope.isShowErrorMessage)
+        {
+            StudentService.showSession($scope.data.sessionId).success(function(data){
+                $scope.dataContent = data;
+            });
+        }
+
+   };
+    $scope.getInSessionToLoad = function(data){
+       StudentService.showSession(data.keyName).success(function(data){
             $scope.dataContent = data;
+            $scope.data.sessionId = $scope.dataContent.keyName;
        });
    };
    $scope.deleteSession = function(){
-       StudentService.deleteSession().success(function(data){
-        $scope.getInSession();
-       });
+        if($scope.data.sessionId == undefined)
+        {
+            $scope.isShowErrorMessage = true;
+        }else{
+        $scope.isShowErrorMessage = false;
+        }
+        if(!$scope.isShowErrorMessage)
+        {
+         StudentService.deleteSession($scope.data.sessionId).success(function(data){
+                $scope.getInSession($scope.data.sessionId);
+           });
+        }
+
    };
+
+
 
    $scope.gridOptions = {
     paginationPageSizes: [5, 10, 20],
@@ -67,17 +95,17 @@ app.service('StudentService',['$http', function ($http) {
            });
     }
 
-    function showSession() {
+    function showSession(key) {
         return  $http({
           method: 'GET',
-          url: '/values'
+          url: '/values?keyName='+key
         });
     }
 
-    function deleteSession() {
+    function deleteSession(key) {
         return  $http({
           method: 'POST',
-          url: 'delete'
+          url: 'delete?keyName='+key
         });
     }
 

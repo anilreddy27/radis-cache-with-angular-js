@@ -8,18 +8,19 @@ public interface RedisRepository {
 
     /**
      * Return all RedisSampleObject
+     * @param keyName
      */
-    Map<Object, Object> getAllRedisSampleObject();
+    Map<Object, Object> getAllRedisSampleObject(String keyName);
 
     /**
      * Add key-value pair to Redis.
      */
-    void add(RedisSampleObject movie);
+    void add(String s, RedisSampleObject movie);
 
     /**
      * Delete a key-value pair in Redis.
      */
-    void delete(String id);
+    void delete(String keyName, String value);
     
     /**
      * find a RedisSampleObject
