@@ -127,7 +127,7 @@ table#statsTable {
 	<input type="number" placeholder="Size Of Objects To Insert(kb)" id="objectSize" ng-model="data.objectSize" name="objectSize" required />
 	</div>
 
-		<div class="form-label-group">
+		<div class="form-label-group" ng-hide="true">
 			<label for="objectSize">Session Id</label>
 			<input type="text" placeholder="Session Id" id="sessionId" ng-model="data.sessionId" name="objectSize"  />
 			<p style="font-text:red;" ng-if="isShowErrorMessage">Please Enter Session ID</p>
@@ -138,7 +138,7 @@ table#statsTable {
 	<button class="btn btn-1g btn-primary btn-block" ng-click="putInSession()" type="button" ng-disabled="myForm.$invalid || myForm.$pristine">Put Objects In Session</button>
 	<button class="btn btn-sm btn-secondary btn-block" ng-click="getInSession()" type="button">Show Session</button>
 	<button class="btn btn-sm btn-secondary btn-block" ng-click="deleteSession()" type="button">Clear Session</button>
-	<table class="table table-bordered" id="statsTable">
+	<table class="table table-bordered" id="statsTable" ng-show="showSession">
 		<tr>
 			<td>Session Id:</td>
 			<td><div>{{dataContent.keyName}}</div></td>

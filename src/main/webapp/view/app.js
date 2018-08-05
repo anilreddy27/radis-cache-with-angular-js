@@ -19,6 +19,8 @@ app.controller('StudentCtrl', ['$scope','StudentService', function ($scope,Stude
    };
    $scope.getInSession = function(){
 
+        $scope.showSession = true;
+
         if($scope.data.sessionId == undefined)
         {
             $scope.isShowErrorMessage = true;
@@ -29,17 +31,20 @@ app.controller('StudentCtrl', ['$scope','StudentService', function ($scope,Stude
         {
             StudentService.showSession($scope.data.sessionId).success(function(data){
                 $scope.dataContent = data;
+                console.log($scope.showSession);
             });
         }
 
    };
     $scope.getInSessionToLoad = function(data){
+         $scope.showSession = false;
        StudentService.showSession(data.keyName).success(function(data){
             $scope.dataContent = data;
             $scope.data.sessionId = $scope.dataContent.keyName;
        });
    };
    $scope.deleteSession = function(){
+        $scope.showSession = false;
         if($scope.data.sessionId == undefined)
         {
             $scope.isShowErrorMessage = true;
@@ -49,7 +54,7 @@ app.controller('StudentCtrl', ['$scope','StudentService', function ($scope,Stude
         if(!$scope.isShowErrorMessage)
         {
          StudentService.deleteSession($scope.data.sessionId).success(function(data){
-                $scope.getInSession($scope.data.sessionId);
+               // $scope.getInSession($scope.data.sessionId);
            });
         }
 

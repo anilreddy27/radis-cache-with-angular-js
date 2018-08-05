@@ -2,6 +2,8 @@ package com.redissession.controller;
 
 import com.redissession.model.RedisSampleObject;
 import com.redissession.repository.RedisRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,10 +14,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+
 @RestController
 @RequestMapping("/")
 public class WebController {
-    
+
+    private final Logger LOG = LoggerFactory.getLogger(getClass());
+
     @Autowired
     private RedisRepository redisRepository;
 
@@ -44,6 +49,7 @@ public class WebController {
 
         Date responseDate = new Date();
 
+        LOG.info("response time : ");
         Long time= responseDate.getTime() - fromDate.getTime();
 
         Map<String, String> resultMap = new HashMap<String, String>();
@@ -51,6 +57,8 @@ public class WebController {
         resultMap.put("noOfObjects", String.valueOf(map.keySet().size()));
         resultMap.put("noOfObjectInSize", String.valueOf(size/1024));
         resultMap.put("responseTime", String.valueOf(time));
+
+        LOG.info("response time(in milli seconds) : "+String.valueOf(time));
 
         return resultMap;
     }

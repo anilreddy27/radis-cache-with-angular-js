@@ -12,13 +12,13 @@ import javax.annotation.PostConstruct;
 
 @Repository
 public class RedisRepositoryImpl implements RedisRepository {
-    private static final String KEY = "RedisSampleObject";
+    private static final String KEY = "a";
     
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
     private HashOperations hashOperations;
     
     @Autowired
-    public RedisRepositoryImpl(RedisTemplate redisTemplate){
+    public RedisRepositoryImpl(RedisTemplate<String, Object> redisTemplate){
         this.redisTemplate = redisTemplate;
     }
 

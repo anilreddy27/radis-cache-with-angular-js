@@ -1,3 +1,4 @@
+/*
 package com.redissession.config;
 
 import com.redissession.queue.MessagePublisher;
@@ -63,4 +64,4 @@ public class RedisConfigCloud {
         return new ChannelTopic("pubsub:queue");
     }
 
-}
+}*/
