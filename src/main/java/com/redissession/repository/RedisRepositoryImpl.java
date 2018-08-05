@@ -1,5 +1,7 @@
 package com.redissession.repository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -13,7 +15,9 @@ import javax.annotation.PostConstruct;
 @Repository
 public class RedisRepositoryImpl implements RedisRepository {
     private static final String KEY = "a";
-    
+
+    private final Logger LOG = LoggerFactory.getLogger(getClass());
+
     private RedisTemplate<String, Object> redisTemplate;
     private HashOperations hashOperations;
     
@@ -28,6 +32,7 @@ public class RedisRepositoryImpl implements RedisRepository {
     }
     
     public void add(String sessionId, final RedisSampleObject movie) {
+        LOG.info("key name ("+KEY+"_"+sessionId+")");
         hashOperations.put(KEY+"_"+sessionId, movie.getId(), movie.getName());
     }
 
