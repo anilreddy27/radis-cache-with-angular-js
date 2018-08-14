@@ -30,9 +30,7 @@ public class WebController {
         Date fromDate = new Date();
         if(!session.isNew())
         {
-
             int size = 0;
-
 
             List<RedisSampleObject> redisSampleObjects = (List<RedisSampleObject>) session.getAttribute("testObjectForSession");
             for(RedisSampleObject redisSampleObject : redisSampleObjects)
@@ -72,7 +70,12 @@ public class WebController {
             createTestObject(key, value, session, redisSampleObjectList);
 
         }else{
-            //List<RedisSampleObject> redisSampleObjects = (List<RedisSampleObject>) session.getAttribute("testObjectForSession");
+
+           /* List<RedisSampleObject> redisSampleObjects = (List<RedisSampleObject>) session.getAttribute("testObjectForSession");
+            if(redisSampleObjects == null)
+            {
+                redisSampleObjects = new ArrayList<>();
+            }*/
             createTestObject(key, value, session, redisSampleObjectList);
         }
 
