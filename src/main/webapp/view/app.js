@@ -14,6 +14,7 @@ app.controller('StudentCtrl', ['$scope','StudentService', function ($scope,Stude
         StudentService.putInSession($scope.data.objectCount,$scope.data.objectSize).success(function(data){
          $scope.data = {};
            $scope.getInSessionToLoad(data);
+           $scope.showPutInTheSession = true;
 
         });;
    };
@@ -45,6 +46,7 @@ app.controller('StudentCtrl', ['$scope','StudentService', function ($scope,Stude
    };
    $scope.deleteSession = function(){
         $scope.showSession = false;
+         $scope.showPutInTheSession = false;
         if($scope.data.sessionId == undefined)
         {
             $scope.isShowErrorMessage = true;

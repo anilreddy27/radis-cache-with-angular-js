@@ -138,19 +138,20 @@ table#statsTable {
 	<button class="btn btn-1g btn-primary btn-block" ng-click="putInSession()" type="button" ng-disabled="myForm.$invalid || myForm.$pristine">Put Objects In Session</button>
 	<button class="btn btn-sm btn-secondary btn-block" ng-click="getInSession()" type="button">Show Session</button>
 	<button class="btn btn-sm btn-secondary btn-block" ng-click="deleteSession()" type="button">Clear Session</button>
-	<table class="table table-bordered" id="statsTable" ng-show="showSession">
-		<tr>
+	<table class="table table-bordered" id="statsTable" >
+		<tr ng-show="showSession || showPutInTheSession">
 			<td>Session Id:</td>
 			<td><div>{{dataContent.keyName}}</div></td>
 		</tr>
-		<tr>
+		<tr ng-show="showSession">
 			<td>Total Objects In Session:</td>
 			<td><div>{{dataContent.noOfObjects}}</div></td>
 		</tr>
-		<tr>
+		<tr ng-show="showSession">
 			<td>Total Session Size(KB):</td>
 			<td><div>{{dataContent.noOfObjectInSize}}</div></td>
-		</tr><tr>
+		</tr>
+		<tr ng-show="showSession || showPutInTheSession">
 		<td>Response Time(In Milli Seconds):</td>
 		<td><div>{{dataContent.responseTime}}</div></td>
 	</tr>

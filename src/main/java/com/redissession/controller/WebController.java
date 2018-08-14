@@ -26,7 +26,6 @@ public class WebController {
 
     @RequestMapping("/keys")
     public @ResponseBody Map<Object, Object> keys(@RequestParam(required = false)String keyName) {
-
         return redisRepository.getAllRedisSampleObject(keyName);
     }
 
@@ -49,7 +48,6 @@ public class WebController {
 
         Date responseDate = new Date();
 
-        LOG.info("response time : ");
         Long time= responseDate.getTime() - fromDate.getTime();
 
         Map<String, String> resultMap = new HashMap<String, String>();
@@ -68,6 +66,7 @@ public class WebController {
         @RequestParam String key,
         @RequestParam String value) {
 
+        Date fromDate = new Date();
             StringBuilder sb = new StringBuilder();
 
             for (int i=0; i<Integer.valueOf(value)*1024; i++) {
@@ -84,7 +83,13 @@ public class WebController {
             redisRepository.add(sessionId,movie);
         }
          Map<String, String> resultMap = new HashMap<String, String>();
-        resultMap.put("keyName",redisRepository.getKEY()+"_"+sessionId);
+
+        Date responseDate = new Date();
+
+        Long time= responseDate.getTime() - fromDate.getTime();
+
+        resultMap.put("keyName",redisRepository.getKEY()+""+sessionId.replaceAll("-",""));
+        resultMap.put("responseTime", String.valueOf(time));
         return resultMap;
     }
 

@@ -14,7 +14,7 @@ import javax.annotation.PostConstruct;
 
 @Repository
 public class RedisRepositoryImpl implements RedisRepository {
-    private static final String KEY = "a";
+    private static final String KEY = "";
 
     private final Logger LOG = LoggerFactory.getLogger(getClass());
 
@@ -32,8 +32,9 @@ public class RedisRepositoryImpl implements RedisRepository {
     }
     
     public void add(String sessionId, final RedisSampleObject movie) {
-        LOG.info("key name ("+KEY+"_"+sessionId+")");
-        hashOperations.put(KEY+"_"+sessionId, movie.getId(), movie.getName());
+        sessionId = sessionId.replaceAll("-","");
+        LOG.info("key name ("+KEY+""+sessionId+")");
+        hashOperations.put(KEY+""+sessionId, movie.getId(), movie.getName());
     }
 
     public void delete(String keyName, final String value) {
@@ -45,6 +46,7 @@ public class RedisRepositoryImpl implements RedisRepository {
     }
     
     public Map<Object, Object> getAllRedisSampleObject(String keyName){
+        keyName = keyName.replaceAll("-","");
         return hashOperations.entries(keyName);
     }
 
