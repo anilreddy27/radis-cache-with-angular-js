@@ -27,7 +27,7 @@ public class WebController {
 
         LOG.info("Begin - "+session.getId());
         Map<String, String> resultMap = new HashMap<String, String>();
-        Date fromDate = new Date();
+        //Date fromDate = new Date();
         if(!session.isNew())
         {
             int size = 0;
@@ -42,8 +42,11 @@ public class WebController {
             resultMap.put("noOfObjectInSize", String.valueOf(size/1024));
 
         }
-        Date responseDate = new Date();
-        Long time = responseDate.getTime()-fromDate.getTime();
+        Long creationTime = (Long)session.getAttribute("CreationTime");
+        if(creationTime == null)
+            creationTime = session.getCreationTime();
+
+        Long time = System.currentTimeMillis()-creationTime;
         resultMap.put("keyName",session.getId());
         resultMap.put("responseTime", String.valueOf(time));
         return resultMap;
@@ -59,8 +62,6 @@ public class WebController {
         Map<String, String> resultMap = new HashMap<String, String>();
         List<RedisSampleObject> redisSampleObjectList = new ArrayList<>();
 
-        Date fromDate = new Date();
-
         if(session.isNew())
         {
             String instanceId = environment.getProperty("vcap.application.instance_id");
@@ -70,7 +71,6 @@ public class WebController {
             createTestObject(key, value, session, redisSampleObjectList);
 
         }else{
-
            /* List<RedisSampleObject> redisSampleObjects = (List<RedisSampleObject>) session.getAttribute("testObjectForSession");
             if(redisSampleObjects == null)
             {
@@ -84,8 +84,7 @@ public class WebController {
         session.setAttribute("MaxInactiveInterval",session.getMaxInactiveInterval());
         session.setAttribute("CreationTime",session.getCreationTime());
 
-        Date responseDate = new Date();
-        Long time= responseDate.getTime() - fromDate.getTime();
+        Long time = System.currentTimeMillis()-(Long)session.getAttribute("CreationTime");
         resultMap.put("keyName",session.getId());
         resultMap.put("responseTime", String.valueOf(time));
         return resultMap;
